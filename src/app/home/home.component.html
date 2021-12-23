@@ -1,15 +1,46 @@
 <ActionBar class="action-bar">
   <NavigationButton visibility="hidden"></NavigationButton>
   <GridLayout columns="50, *">
-    <Label class="action-bar-title" text="Current Gas Prices" colSpan="2"></Label>
-
+    <Label class="action-bar-title" text="Current Gas Prices!" colSpan="2"></Label>
     <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
+
   </GridLayout>
 </ActionBar>
 
-<GridLayout class="page__content">
-  <!-- <Label class="page__content-icon fas" text="&#xf015;"></Label> -->
-  <Label class="page__content-placeholder" text="{{ safeGasPrice }}">
-  </Label>
+
+<!-- 
+<GridLayout columns="100, 100, 100" backgroundColor="#3c495e">
+  <Label padding="40px" text="Safe Gas Price: {{safeGasPrice}}" height="70" backgroundColor="#43b883"></Label>
+  <Label padding="40px" text="Propose Gas Price: {{proposeGasPrice}}" height="70" backgroundColor="#ff6600"></Label>
+  <Label padding="40px" text="Fast Gas Price: {{fastGasPrice}}" height="70" backgroundColor="#43b883"></Label>
+</GridLayout> -->
+
+
+<GridLayout columns="*, *, *" rows="*" backgroundColor="#cccccc">
+
+  <GridLayout columns="*" rows="auto,auto" backgroundColor="#00c9a7">
+    <Label class="my-label" padding="40px" text="Low:" row="0" col="0"></Label>
+    <Label class="my-label" padding="40px" text="{{safeGasPrice}} gwei" row="1" col="0"></Label>
+  </GridLayout>
+
+  <GridLayout columns="*" rows="auto,auto" backgroundColor="#3498db" col="1">
+    <Label class="my-label" padding="40px" text="Average:" row="0" col="0"></Label>
+    <Label class="my-label" padding="40px" text="{{proposeGasPrice}} gwei" row="1" col="0"></Label>
+  </GridLayout>
+
+  <GridLayout columns="*" rows="auto,auto" backgroundColor="#a52a2a" col="2">
+    <Label class="my-label" padding="40px" text="High:" row="0" col="0"></Label>
+    <Label class="my-label" padding="40px" text="{{fastGasPrice}} gwei" row="1" col="0"></Label>
+  </GridLayout>
   
 </GridLayout>
+
+<!-- <StackLayout backgroundColor="#3c495e">
+  <Label padding="40px" text="Safe Gas Price: {{safeGasPrice}}" height="70" backgroundColor="#43b883"></Label>
+  <Label padding="40px" text="Propose Gas Price: {{proposeGasPrice}}" height="70" backgroundColor="#ff6600"></Label>
+  <Label padding="40px" text="Fast Gas Price: {{fastGasPrice}}" height="70" backgroundColor="#43b883"></Label>
+
+</StackLayout> -->
+
+
+

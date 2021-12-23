@@ -20,8 +20,14 @@
   font-weight: 400;
 }
 
+.my-label{
+  font-weight: bold;
+  font-size: 16;
+}
+
 // Common page class
 .page__content {
+  padding: 20%;
   &-icon,
   &-placeholder {
     color: const(grey);

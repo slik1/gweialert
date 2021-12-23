@@ -11,6 +11,9 @@ import { Subscription, interval } from 'rxjs';
 export class HomeComponent implements OnInit, OnDestroy {
 
   safeGasPrice:any;
+  proposeGasPrice:any;
+  fastGasPrice:any;
+
   sub:Subscription;
 
   constructor() {
@@ -25,6 +28,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       (result: any) => {
         console.log(result.result.SafeGasPrice)
         this.safeGasPrice = result.result.SafeGasPrice;
+        this.proposeGasPrice = result.result.ProposeGasPrice;
+        this.fastGasPrice = result.result.FastGasPrice;
       },
       e => {}
     )

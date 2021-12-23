@@ -10,16 +10,28 @@
 
 
 
-<GridLayout>
-  <Label lineHeight="100" text="Set gwei threshold for alert!!!!" row="0" col="0" backgroundColor="#43b883"></Label>
-    <StackLayout>
-      <Slider
-      value="10"
-      minValue="0"
-      maxValue="100"
-      (valueChange)="onSliderValueChange($event)"
-      >
-      </Slider>
-    </StackLayout>
+<GridLayout columns="*" rows="100, auto, auto, auto" backgroundColor="#cccccc">
+
+    <GridLayout columns="*, auto">
+      <Label padding="20" text="Enable alerts"></Label>
+      <Switch height="100" checked="{{isEnabled}}" (checkedChange)="onCheckedChange($event)"> </Switch>
+      
+    </GridLayout>
+    
+
+  <!-- <Label height="100" text="Set gwei threshold for alert!!!!" row="0" col="0" backgroundColor="#43b883"></Label> -->
+  <StackLayout row="1" col="0" *ngIf="isEnabled">
+    <Slider
+    value="{{gasThreshold}}"
+    minValue="0"
+    maxValue="200"
+    (valueChange)="onSliderValueChange($event)"
+    >
+    </Slider>
+  </StackLayout>
   
+  <Label *ngIf="isEnabled" class="my-label" padding="40px" text="{{gasThreshold}} gwei" row="2" col="0" backgroundColor="#43b883"></Label>
+
+
+
 </GridLayout>
