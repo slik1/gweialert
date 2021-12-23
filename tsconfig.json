@@ -12,7 +12,10 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"],
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "*": [
+        "./node_modules/tns-core-modules/*",
+      ]
     }
   },
   "include": ["./src/**/*.ios.ts", "./src/**/*.android.ts"],

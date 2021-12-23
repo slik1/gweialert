@@ -21,6 +21,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.sub= interval(5000).subscribe((x =>{
       this.checkGasPrices();
   }));
+
+
+
+
   }
 
   checkGasPrices(){
@@ -72,9 +76,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log('ngOnDestoy, this.sub.unsubscribe!!!');
     this.sub.unsubscribe();
   }
-
-
-
 
 
 }
