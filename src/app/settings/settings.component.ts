@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer'
 import { Application } from '@nativescript/core'
+import { Slider } from '@nativescript/core'
 
 @Component({
   selector: 'Settings',
@@ -18,5 +19,10 @@ export class SettingsComponent implements OnInit {
   onDrawerButtonTap(): void {
     const sideDrawer = <RadSideDrawer>Application.getRootView()
     sideDrawer.showDrawer()
+  }
+
+  onSliderValueChange(args) {
+    const slider = args.object as Slider
+    console.log(`Slider new value ${args.value}`)
   }
 }

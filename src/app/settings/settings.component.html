@@ -7,7 +7,19 @@
   </GridLayout>
 </ActionBar>
 
-<GridLayout class="page__content">
-  <Label class="page__content-icon fas" text="&#xf013;"></Label>
-  <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+
+
+
+<GridLayout>
+  <Label lineHeight="100" text="Set gwei threshold for alert!!!!" row="0" col="0" backgroundColor="#43b883"></Label>
+    <StackLayout>
+      <Slider
+      value="10"
+      minValue="0"
+      maxValue="100"
+      (valueChange)="onSliderValueChange($event)"
+      >
+      </Slider>
+    </StackLayout>
+  
 </GridLayout>
