@@ -5,6 +5,7 @@ import { Http, HttpResponse } from '@nativescript/core'
 import { Subscription, interval } from 'rxjs';
 
 import { GasSettingsService } from '../gas-settings.service';
+import { LocalNotifications } from '@nativescript/local-notifications';
 
 @Component({
   selector: 'Home',
@@ -17,25 +18,54 @@ export class HomeComponent implements OnInit {
   fastGasPrice:any;
 
   sub:Subscription;
-
+  sentRecently:boolean;
   //currentThreshold:any;
 
   constructor(private gasSettings: GasSettingsService) {
     // Use the component constructor to inject providers.
+    this.sub= interval(5000).subscribe((x =>{
+      this.checkGasPrices();
 
+    }));
   }
 
-  // checkGasPrices(){
-  //   Http.getJSON('https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=TUCC7XGK52D3F93IKCBUJ357RVQUZ4JR7Z').then(
-  //     (result: any) => {
-  //       console.log(result.result.SafeGasPrice)
-  //       this.safeGasPrice = result.result.SafeGasPrice;
-  //       this.proposeGasPrice = result.result.ProposeGasPrice;
-  //       this.fastGasPrice = result.result.FastGasPrice;
-  //     },
-  //     e => {}
-  //   )
-  // }
+  startTimer(){
+    //Wait 4 Hours before sending another notification!
+    setTimeout(() => {
+      //do this!
+      this.sentRecently = false;
+    }, this.milisec);
+  }
+
+  milisec = this.miliseconds(4,0,0);
+
+  miliseconds(hrs,min,sec){
+      return((hrs*60*60+min*60+sec)*1000);
+  }
+
+  checkGasPrices(){
+    Http.getJSON('https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=TUCC7XGK52D3F93IKCBUJ357RVQUZ4JR7Z').then(
+      (result: any) => {
+        console.log(result.result.SafeGasPrice)
+        this.safeGasPrice = result.result.SafeGasPrice;
+        this.proposeGasPrice = result.result.ProposeGasPrice;
+        this.fastGasPrice = result.result.FastGasPrice;
+        console.log('result.result.SafeGasPrice: ', result.result.SafeGasPrice);
+        console.log('this.currentThreshold: ', this.currentThreshold);
+        if(result.result.SafeGasPrice <= this.currentThreshold){
+          console.log('yup, safeGas is lower than threshold');
+          //Threshold met! Activate alert!
+          if(!this.sentRecently){
+            this.activateAlert();
+            this.sentRecently = true;
+            this.startTimer();
+          }
+          
+        }
+      },
+      e => {}
+    )
+  }
 
   get currentThreshold() {
     if(parseInt(ApplicationSettings.getString("myGasThreshold"))){
@@ -47,7 +77,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // Init your component properties here.
-    //this.checkGasPrices();
+    this.checkGasPrices();
     // //in 10 seconds do something
     // interval(5000).subscribe(x => {
     //   this.checkGasPrices();
@@ -89,7 +119,36 @@ export class HomeComponent implements OnInit {
 
 
 
-
+  activateAlert(){
+    LocalNotifications.schedule([
+      {
+        id: 1, // generated id if not set
+        title: 'Yoooooo!',
+        body: `Gas price is or below: ${this.currentThreshold}`,
+        ticker: 'The ticker',
+        //color: new Color('red'),
+        badge: 1,
+        forceShowWhenInForeground: true,
+        //groupedMessages: ['The first', 'Second', 'Keep going', 'one more..', 'OK Stop'], //android only
+        //groupSummary: 'Summary of the grouped messages above', //android only
+        //ongoing: true, // makes the notification ongoing (Android only)
+        icon: 'res://heart',
+        image: 'https://cdn-images-1.medium.com/max/1200/1*c3cQvYJrVezv_Az0CoDcbA.jpeg',
+        thumbnail: true,
+        //interval: 'minute',
+        channel: 'My Channel', // default: 'Channel'
+        //sound: isAndroid ? 'customsound' : 'customsound.wav',
+        at: new Date(new Date().getTime() + 5 * 1000) // 5 seconds from now
+      }
+    ]).then(
+      scheduledIds => {
+        console.log('Notification id(s) scheduled: ' + JSON.stringify(scheduledIds))
+      },
+      error => {
+        console.log('scheduling error: ' + error)
+      }
+    )
+  }
 
 
 

@@ -24,15 +24,15 @@ export class AppComponent implements OnInit {
   private _activatedUrl: string
   private _sideDrawerTransition: DrawerTransitionBase
 
-  safeGasPrice: any
-  proposeGasPrice: any
-  fastGasPrice: any
+  // safeGasPrice: any
+  // proposeGasPrice: any
+  // fastGasPrice: any
   sub:Subscription;
   constructor(private router: Router, private routerExtensions: RouterExtensions, private gasSettings: GasSettingsService) {
     // Use the component constructor to inject services.
-    this.sub= interval(5000).subscribe((x =>{
-      this.checkGasPrices();
-    }));
+    // this.sub= interval(5000).subscribe((x =>{
+    //   this.checkGasPrices();
+    // }));
   }
 
 
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
     this._activatedUrl = '/home';
     this._sideDrawerTransition = new SlideInOnTopTransition();
 
-    this.checkGasPrices();
+    //this.checkGasPrices();
 
 
 
@@ -102,16 +102,6 @@ export class AppComponent implements OnInit {
     LocalNotifications.cancelAll();
   }
 
-  checkGasPrices(){
-    Http.getJSON('https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=TUCC7XGK52D3F93IKCBUJ357RVQUZ4JR7Z').then(
-      (result: any) => {
-        console.log(result.result.SafeGasPrice)
-        this.safeGasPrice = result.result.SafeGasPrice;
-        this.proposeGasPrice = result.result.ProposeGasPrice;
-        this.fastGasPrice = result.result.FastGasPrice;
-      },
-      e => {}
-    )
-  }
+
 
 }
