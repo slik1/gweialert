@@ -1,7 +1,7 @@
 <ActionBar class="action-bar">
   <NavigationButton visibility="hidden"></NavigationButton>
   <GridLayout columns="50, *">
-    <Label class="action-bar-title" text="Current Gas Prices!" colSpan="2"></Label>
+    <Label class="action-bar-title" text="Current Gas Prices" colSpan="2"></Label>
     <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
 
   </GridLayout>
@@ -16,7 +16,7 @@
 </GridLayout> -->
 
 
-<GridLayout columns="*, *, *" rows="*" backgroundColor="#cccccc">
+<!-- <GridLayout columns="*, *, *" rows="*, *" backgroundColor="#cccccc">
 
   <GridLayout columns="*" rows="auto,auto" backgroundColor="#00c9a7">
     <Label class="my-label" padding="40px" text="Low:" row="0" col="0"></Label>
@@ -34,13 +34,48 @@
   </GridLayout>
 
   
-  
-</GridLayout>
 
-<!-- <StackLayout backgroundColor="#3c495e">
+
+
+  
+</GridLayout> -->
+
+
+
+
+<StackLayout backgroundColor="#3c495e">
+  <Label padding="40px" text="{{currentThreshold}}"></Label>
+</StackLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<StackLayout backgroundColor="#3c495e">
   <Label padding="40px" text="Safe Gas Price: {{safeGasPrice}}" height="70" backgroundColor="#43b883"></Label>
   <Label padding="40px" text="Propose Gas Price: {{proposeGasPrice}}" height="70" backgroundColor="#ff6600"></Label>
   <Label padding="40px" text="Fast Gas Price: {{fastGasPrice}}" height="70" backgroundColor="#43b883"></Label>
+  <Label padding="40px" text="{{currentCount}}"></Label>
+
+  <Button (tap)="increment()" text="Plus"></Button>
+  <Button (tap)="decrement()" text="Minus"></Button>
+  <Button (tap)="reset()" text="Reset"></Button>
+
+
+
+  <button type="button" class="btn btn-info" (click)="increment()"><i class="fas fa-plus"></i></button>
+  <button type="button" class="btn btn-info" (click)="decrement()"><i class="fas fa-minus"></i></button>
+  <button type="button" class="btn btn-info" (click)="reset()"><i class="fas fa-redo"></i></button>
 
 </StackLayout> -->
 

@@ -8,9 +8,9 @@
 	<true/>
 	<key>com.apple.security.network.client</key>
 	<true/>
-	<key>com.apple.keystore.access-keychain-keys</key>
+	<!-- <key>com.apple.keystore.access-keychain-keys</key>
     <true/>
     <key>com.apple.keystore.device</key>
-    <true/>
+    <true/> -->
 </dict>
 </plist>
