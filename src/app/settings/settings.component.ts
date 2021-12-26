@@ -47,7 +47,7 @@ export class SettingsComponent implements OnInit {
       this.gasThreshold = parseInt(ApplicationSettings.getString("myGasThreshold"));
 
     }else{
-      this.gasThreshold = this.gasSettings.currentThreshold.value;
+      this.gasThreshold = 55;
     }
     console.log("yooooo getString: ", ApplicationSettings.getString("myGasThreshold", "nada"));
     this.isEnabled = ApplicationSettings.getBoolean("alertsEnabled", false);

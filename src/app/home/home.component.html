@@ -1,7 +1,7 @@
 <ActionBar class="action-bar">
   <NavigationButton visibility="hidden"></NavigationButton>
   <GridLayout columns="50, *">
-    <Label class="action-bar-title" text="Current Gas Prices!!" colSpan="2"></Label>
+    <Label class="action-bar-title" text="Current Gas Price" colSpan="2"></Label>
     <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
 
   </GridLayout>
@@ -39,25 +39,76 @@
 
 
 
+<GridLayout columns="*" rows="auto, 3*" backgroundColor="#000">
 
-<StackLayout backgroundColor="#3c495e">
-  <Label padding="40px" text="You are waiting for {{currentThreshold}} gwei"></Label>
-  <GridLayout columns="*" rows="auto,auto" backgroundColor="#00c9a7">
-    <Label class="my-label" padding="40px" text="Low:" row="0" col="0"></Label>
-    <Label class="my-label" padding="40px" text="{{safeGasPrice}} gwei" row="1" col="0"></Label>
+  <!-- <Label color="#fff" row="0" padding="40px" text="You are waiting for: {{currentThreshold}} gwei"></Label> -->
+
+  <label textWrap="true" padding="40px">
+    <FormattedString color="#fff">
+      <span text="You are waiting for: " style="color: white"></span>
+      <span text="{{currentThreshold}} gwei" fontWeight="bold"></span>
+    </FormattedString>
+  </label>
+
+  <GridLayout padding="40px" row="1" columns="*" rows="*,*" backgroundColor="#000" verticalAlignment="stretch">
+    <!-- <Label class="main-value" horizontalAlignment="center" padding="10px" text="{{safeGasPrice}} gwei" row="0" col="0"></Label> -->
+    
+    <label class="main-value" verticalAlignment="bottom" horizontalAlignment="center" textWrap="true" padding="40px">
+      <FormattedString color="#fff">
+        <span text="{{safeGasPrice}}" fontWeight="bold"></span>
+        <span text="gwei" fontSize="16px" fontWeight="normal" color="#3b3b3b"></span>
+      </FormattedString>
+    </label>
+    
+    
+    <ActivityIndicator *ngIf="safeGasPrice == undefined" [busy]="safeGasPrice == undefined" (busyChange)="onBusyChanged($event)">
+    </ActivityIndicator>
+
+    <Label color="#555" class="" verticalAlignment="bottom" horizontalAlignment="center" padding="10px" text="Refreshes every 5 seconds." row="1" col="0"></Label>
   </GridLayout>
 
-  <GridLayout columns="*" rows="auto,auto" backgroundColor="#3498db" col="1">
-    <Label class="my-label" padding="40px" text="Average:" row="0" col="0"></Label>
-    <Label class="my-label" padding="40px" text="{{proposeGasPrice}} gwei" row="1" col="0"></Label>
+
+<!-- 
+  <GridLayout columns="auto, auto, auto" rows="auto" backgroundColor="#000000">
+
+
+    <GridLayout columns="auto" rows="auto,auto" backgroundColor="#000000">
+      <Label class="small-value" horizontalAlignment="center" padding="10px" text="{{safeGasPrice}}" row="0" col="0"></Label>
+      <Label class="small-label" horizontalAlignment="center" padding="10px" text="Low" row="1" col="0"></Label>
+    </GridLayout>
+    <GridLayout columns="auto" rows="auto,auto" backgroundColor="#000000">
+      <Label class="small-value" horizontalAlignment="center" padding="10px" text="{{proposeGasPrice}}" row="0" col="1"></Label>
+      <Label class="small-label" horizontalAlignment="center" padding="10px" text="Low" row="1" col="1"></Label>
+    </GridLayout>
+    <GridLayout columns="auto" rows="auto,auto" backgroundColor="#000000">
+      <Label class="small-value" horizontalAlignment="center" padding="10px" text="{{fastGasPrice}}" row="0" col="2"></Label>
+      <Label class="small-label" horizontalAlignment="center" padding="10px" text="Low" row="1" col="2"></Label>
+    </GridLayout>
+
+  </GridLayout>
+ -->
+
+
+
+
+
+</GridLayout>
+
+
+
+<!-- 
+
+<StackLayout backgroundColor="#3b3b3b">
+  <Label color="#ffffff" padding="40px" text="You are waiting for {{currentThreshold}} gwei"></Label>
+  <GridLayout columns="*" rows="auto,auto" backgroundColor="#000000" verticalAlignment="stretch">
+    <Label class="main-value" horizontalAlignment="center" padding="10px" text="{{safeGasPrice}}" row="0" col="0"></Label>
+    <Label color="#eeeeee" class="" horizontalAlignment="center" padding="10px" text="Average" row="1" col="0"></Label>
   </GridLayout>
 
-  <GridLayout columns="*" rows="auto,auto" backgroundColor="#a52a2a" col="2">
-    <Label class="my-label" padding="40px" text="High:" row="0" col="0"></Label>
-    <Label class="my-label" padding="40px" text="{{fastGasPrice}} gwei" row="1" col="0"></Label>
-  </GridLayout>
+
+
 </StackLayout>
-
+ -->
 
 
 

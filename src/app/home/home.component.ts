@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private gasSettings: GasSettingsService) {
     // Use the component constructor to inject providers.
+    //Every 5 seconds!
     this.sub= interval(5000).subscribe((x =>{
       this.checkGasPrices();
 
@@ -37,10 +38,18 @@ export class HomeComponent implements OnInit {
     }, this.milisec);
   }
 
+  //Set wait time to 4 hours
   milisec = this.miliseconds(4,0,0);
 
   miliseconds(hrs,min,sec){
       return((hrs*60*60+min*60+sec)*1000);
+  }
+
+  //Check device storage for alertsEnabled boolean value and assign, if none assign false
+  isEnabled = ApplicationSettings.getBoolean("alertsEnabled", false);
+
+  onBusyChanged($event){
+    console.log($event);
   }
 
   checkGasPrices(){
@@ -55,10 +64,14 @@ export class HomeComponent implements OnInit {
         if(result.result.SafeGasPrice <= this.currentThreshold){
           console.log('yup, safeGas is lower than threshold');
           //Threshold met! Activate alert!
-          if(!this.sentRecently){
-            this.activateAlert();
-            this.sentRecently = true;
-            this.startTimer();
+          if(this.isEnabled){
+
+            if(!this.sentRecently){
+              this.activateAlert();
+              this.sentRecently = true;
+              this.startTimer();
+            }
+            
           }
           
         }
@@ -71,7 +84,7 @@ export class HomeComponent implements OnInit {
     if(parseInt(ApplicationSettings.getString("myGasThreshold"))){
       return parseInt(ApplicationSettings.getString("myGasThreshold"));
     }else{
-      return this.gasSettings.currentThreshold.value;
+      return 55;
     }
   }
 
@@ -133,7 +146,7 @@ export class HomeComponent implements OnInit {
         //groupSummary: 'Summary of the grouped messages above', //android only
         //ongoing: true, // makes the notification ongoing (Android only)
         icon: 'res://heart',
-        image: 'https://cdn-images-1.medium.com/max/1200/1*c3cQvYJrVezv_Az0CoDcbA.jpeg',
+        image: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/money-mouth-face.png',
         thumbnail: true,
         //interval: 'minute',
         channel: 'My Channel', // default: 'Channel'

@@ -25,6 +25,21 @@
   font-size: 16;
 }
 
+.main-value{
+  font-weight: bold;
+  font-size: 76;
+  color: const(white);
+}
+
+.small-value{
+  color: #ffffff;
+  font-size: 18;
+}
+.small-label{
+  color: #ccc;
+  font-size: 18;
+}
+
 // Common page class
 .page__content {
   padding: 20%;
