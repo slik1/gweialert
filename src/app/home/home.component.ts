@@ -19,8 +19,7 @@ export class HomeComponent implements OnInit {
 
   sub:Subscription;
   sentRecently:boolean;
-  //currentThreshold:any;
-
+  
   constructor(private gasSettings: GasSettingsService) {
     // Use the component constructor to inject providers.
     //Every 5 seconds!
@@ -89,38 +88,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Init your component properties here.
     this.checkGasPrices();
-    // //in 10 seconds do something
-    // interval(5000).subscribe(x => {
-    //   this.checkGasPrices();
-    // });
-
-
-
-    //See if threshold is saved in "app settings"
-    if(parseInt(ApplicationSettings.getString("myGasThreshold"))){
-      //this.currentThreshold = parseInt(ApplicationSettings.getString("myGasThreshold"));
-      
-    }else{
-      //this.currentThreshold = this.gasSettings.currentThreshold.value;
-
-    }
-
-    // Http.request({
-    //   url: 'https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=TUCC7XGK52D3F93IKCBUJ357RVQUZ4JR7Z',
-    //   method: 'GET'
-    // }).then(
-    //   (response: HttpResponse) => {
-    //     // Argument (response) is HttpResponse
-    //     console.log(`Response Status Code: ${response.statusCode}`)
-    //     console.log(`Response Headers: ${response.statusCode}`)
-    //     console.log(`Response Content: ${response.content}`)
-    //     this.safeGasPrice = response.content;
-    //     console.log('my result: ', response.content);
-    //   },
-    //   e => {}
-    // )
   }
 
   onDrawerButtonTap(): void {
@@ -129,22 +97,16 @@ export class HomeComponent implements OnInit {
   }
 
 
-
-
-
   activateAlert(){
     LocalNotifications.schedule([
       {
         id: 1, // generated id if not set
         title: 'Yoooooo!',
-        body: `Gas price is or below: ${this.currentThreshold}`,
+        body: `Gas price is or below: ${this.currentThreshold} gwei`,
         ticker: 'The ticker',
         //color: new Color('red'),
         badge: 1,
         forceShowWhenInForeground: true,
-        //groupedMessages: ['The first', 'Second', 'Keep going', 'one more..', 'OK Stop'], //android only
-        //groupSummary: 'Summary of the grouped messages above', //android only
-        //ongoing: true, // makes the notification ongoing (Android only)
         icon: 'res://heart',
         image: 'https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/money-mouth-face.png',
         thumbnail: true,
@@ -163,18 +125,4 @@ export class HomeComponent implements OnInit {
     )
   }
 
-
-
-
-  // ngOnDestroy(){
-  //   console.log('ngOnDestoy, this.sub.unsubscribe!!!');
-  //   this.sub.unsubscribe();
-  // }
-
-
 }
-
-
-
-
-

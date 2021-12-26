@@ -7,40 +7,60 @@
   </GridLayout>
 </ActionBar>
 
-
-
-
 <GridLayout columns="*" rows="100, 100, 100" backgroundColor="#666">
-
-    <FlexboxLayout borderBottomColor="#ccc" borderBottomWidth="1px" justifyContent="space-between" alignItems="center" backgroundColor="#333">
-      <Label fontSize="14px" color="white" padding="20" text="Enable alerts"></Label>
-      <Switch height="100" checked="{{isEnabled}}" (checkedChange)="onCheckedChange($event)"> </Switch>
-      
-    </FlexboxLayout>
-    
-
-  <!-- <Label height="100" text="Set gwei threshold for alert!!!!" row="0" col="0" backgroundColor="#43b883"></Label> -->
-  
-  <FlexboxLayout *ngIf="isEnabled" row="1" padding="40px" color="#fff" justifyContent="space-between" alignItems="center">
-    <Label class="my-label" fontSize="14px" fontWeight="normal" text="Send alert when gas is below:" row="2" col="0" ></Label>
-    <Label class="my-label" fontSize="14px" text="{{gasThreshold}} gwei" row="2" col="0"></Label>
+  <FlexboxLayout
+    borderBottomColor="#ccc"
+    borderBottomWidth="1px"
+    justifyContent="space-between"
+    alignItems="center"
+    backgroundColor="#333"
+  >
+    <Label
+      fontSize="14px"
+      color="white"
+      padding="20"
+      text="Enable alerts"
+    ></Label>
+    <Switch
+      height="100"
+      checked="{{ isEnabled }}"
+      (checkedChange)="onCheckedChange($event)"
+    >
+    </Switch>
   </FlexboxLayout>
 
-  <Slider row="2" *ngIf="isEnabled"
-  value="{{gasThreshold}}"
-  minValue="0"
-  maxValue="200"
-  (valueChange)="onSliderValueChange($event)"
+  <FlexboxLayout
+    *ngIf="isEnabled"
+    row="1"
+    padding="40px"
+    color="#fff"
+    justifyContent="space-between"
+    alignItems="center"
+  >
+    <Label
+      class="my-label"
+      fontSize="14px"
+      fontWeight="normal"
+      text="Send alert when gas is below:"
+      row="2"
+      col="0"
+    ></Label>
+    <Label
+      class="my-label"
+      fontSize="14px"
+      text="{{ gasThreshold }} gwei"
+      row="2"
+      col="0"
+    ></Label>
+  </FlexboxLayout>
+
+  <Slider
+    row="2"
+    *ngIf="isEnabled"
+    value="{{ gasThreshold }}"
+    minValue="0"
+    maxValue="200"
+    (valueChange)="onSliderValueChange($event)"
   >
   </Slider>
-  
-  
-  <!-- <StackLayout row="2" *ngIf="isEnabled">
-
-
-  </StackLayout> -->
-
-  <!-- <Button (tap)="saveThreshold()" text="Save"></Button> -->
-
-
 </GridLayout>
