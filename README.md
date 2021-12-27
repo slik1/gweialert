@@ -1,4 +1,4 @@
-# gaschecker
+# Gwei Alert
 
 Get notified when ETH gas fees have lowered to a threshold you set!
 
