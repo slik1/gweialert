@@ -1,7 +1,7 @@
 import { NativeScriptConfig } from '@nativescript/core';
 
 export default {
-  id: 'org.nativescript.GasCheck',
+  id: 'org.nativescript.GweiAlert',
   appPath: 'src',
   appResourcesPath: 'App_Resources',
   android: {
