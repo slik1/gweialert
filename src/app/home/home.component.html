@@ -12,9 +12,10 @@
 
 <GridLayout columns="*" rows="auto, 3*" backgroundColor="#000">
   <label textWrap="true" padding="40px">
-    <FormattedString color="#fff">
-      <span text="You are waiting for: " style="color: white"></span>
-      <span text="{{ currentThreshold }} gwei" fontWeight="bold"></span>
+    <FormattedString>
+      <span *ngIf="!isEnabled" color="#919191" text="Alerts not enabled. See settings."></span>
+      <span *ngIf="isEnabled" color="#919191" text="You are waiting for: "></span>
+      <span *ngIf="isEnabled" color="#fff" text="{{ currentThreshold }} gwei" fontWeight="bold"></span>
     </FormattedString>
   </label>
 
@@ -39,7 +40,7 @@
           text="gwei"
           fontSize="16px"
           fontWeight="normal"
-          color="#3b3b3b"
+          color="#555"
         ></span>
       </FormattedString>
     </label>
@@ -57,7 +58,7 @@
       verticalAlignment="bottom"
       horizontalAlignment="center"
       padding="10px"
-      text="Current average rate, refreshes every 5 seconds."
+      text="Current safe gas price. Refreshes every 5 seconds."
       row="1"
       col="0"
     ></Label>

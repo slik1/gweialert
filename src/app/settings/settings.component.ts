@@ -49,7 +49,6 @@ export class SettingsComponent implements OnInit {
     }else{
       this.gasThreshold = 55;
     }
-    console.log("yooooo getString: ", ApplicationSettings.getString("myGasThreshold", "nada"));
     this.isEnabled = ApplicationSettings.getBoolean("alertsEnabled", false);
   }
 
@@ -60,9 +59,6 @@ export class SettingsComponent implements OnInit {
 
   onSliderValueChange(args) {
     const slider = args.object as Slider
-    console.log('slider: ', slider);
-    console.log(`Slider new value ${args.value}`)
-
     this.gasThreshold = Math.round(args.value);
 
     //Save in "app settings", is like localStorage?
@@ -74,13 +70,13 @@ export class SettingsComponent implements OnInit {
   onCheckedChange(args: EventData) {
     const sw = args.object as Switch
     const isChecked = sw.checked // boolean
-    console.log('isChecked: ', isChecked);
+    
     this.isEnabled = isChecked;
     ApplicationSettings.setBoolean("alertsEnabled", isChecked);
     
     if(isChecked){
       //ask user to allow notifications (iOS)
-
+      LocalNotifications.requestPermission();
     }
 
   }

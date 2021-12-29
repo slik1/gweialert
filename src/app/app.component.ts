@@ -46,19 +46,6 @@ export class AppComponent implements OnInit {
 
 
 
-    // firebase.init({
-    //   // Optionally pass in properties for database, authentication and cloud messaging,
-    //   // see their respective docs.
-    //   showNotifications: true,
-    //   showNotificationsWhenInForeground: true
-    // }).then(
-    //   () => {
-    //     console.log("firebase.init done");
-    //   },
-    //   error => {
-    //     console.log(`firebase.init error: ${error}`);
-    //   }
-    // );
 
 
     this.router.events
@@ -76,17 +63,8 @@ export class AppComponent implements OnInit {
     return this._activatedUrl === url
   }
 
-  // getUserThreshold(){
-
-  //   if(parseInt(ApplicationSettings.getString("myGasThreshold"))){
-
-  //   }
-
- 
-  // }
 
   onNavItemTap(navItemRoute: string): void {
-    console.log('you in onNavItemTap()');
     this.routerExtensions.navigate([navItemRoute], {
       transition: {
         name: 'fade',

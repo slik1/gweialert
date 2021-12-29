@@ -20,6 +20,11 @@ export class HomeComponent implements OnInit {
   sub:Subscription;
   sentRecently:boolean;
   
+  isEnabled:boolean = false;
+
+  
+
+
   constructor(private gasSettings: GasSettingsService) {
     // Use the component constructor to inject providers.
     //Every 5 seconds!
@@ -45,23 +50,20 @@ export class HomeComponent implements OnInit {
   }
 
   //Check device storage for alertsEnabled boolean value and assign, if none assign false
-  isEnabled = ApplicationSettings.getBoolean("alertsEnabled", false);
+  //this.isEnabled = ApplicationSettings.getBoolean("alertsEnabled", false);
 
   onBusyChanged($event){
-    console.log($event);
+    //console.log($event);
   }
 
   checkGasPrices(){
     Http.getJSON('https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=TUCC7XGK52D3F93IKCBUJ357RVQUZ4JR7Z').then(
       (result: any) => {
-        console.log(result.result.SafeGasPrice)
+
         this.safeGasPrice = result.result.SafeGasPrice;
         this.proposeGasPrice = result.result.ProposeGasPrice;
         this.fastGasPrice = result.result.FastGasPrice;
-        console.log('result.result.SafeGasPrice: ', result.result.SafeGasPrice);
-        console.log('this.currentThreshold: ', this.currentThreshold);
         if(result.result.SafeGasPrice <= this.currentThreshold){
-          console.log('yup, safeGas is lower than threshold');
           //Threshold met! Activate alert!
           if(this.isEnabled){
 
@@ -88,6 +90,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(ApplicationSettings.getBoolean("alertsEnabled") == undefined){
+      this.isEnabled = false;
+    }else{
+      this.isEnabled = ApplicationSettings.getBoolean("alertsEnabled");
+    }
     this.checkGasPrices();
   }
 
@@ -117,10 +124,10 @@ export class HomeComponent implements OnInit {
       }
     ]).then(
       scheduledIds => {
-        console.log('Notification id(s) scheduled: ' + JSON.stringify(scheduledIds))
+        //console.log('Notification id(s) scheduled: ' + JSON.stringify(scheduledIds))
       },
       error => {
-        console.log('scheduling error: ' + error)
+        //console.log('scheduling error: ' + error)
       }
     )
   }

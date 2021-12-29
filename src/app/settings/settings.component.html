@@ -7,7 +7,7 @@
   </GridLayout>
 </ActionBar>
 
-<GridLayout columns="*" rows="100, 100, 100" backgroundColor="#666">
+<GridLayout columns="*" rows="100, 100, 100, *" backgroundColor="#666">
   <FlexboxLayout
     borderBottomColor="#ccc"
     borderBottomWidth="1px"
@@ -63,4 +63,17 @@
     (valueChange)="onSliderValueChange($event)"
   >
   </Slider>
+
+  <Label
+  color="#ccc"
+  class=""
+  verticalAlignment="bottom"
+  horizontalAlignment="center"
+  padding="40px"
+  textWrap="true"
+  text="*Waits 4 hours before sending another alert (unless you change the threshold)"
+  row="3"
+  col="0"
+></Label>
+
 </GridLayout>
